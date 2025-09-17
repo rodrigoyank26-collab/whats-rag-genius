@@ -1,73 +1,175 @@
-# Welcome to your Lovable project
+# WhatsApp RAG Chatbot - Admin Dashboard
 
-## Project info
+Sistema completo de chatbot RAG (Retrieval-Augmented Generation) para WhatsApp com dashboard administrativo profissional.
 
-**URL**: https://lovable.dev/projects/1c5555d2-f767-44bf-90c8-2ac8bc73fe4a
+## 🚀 Recursos Principais
 
-## How can I edit this code?
+### Dashboard Administrativo
+- **Métricas em Tempo Real**: Visualização de conversas ativas, mensagens processadas e status do sistema
+- **Gestão de Conversas**: Interface completa para monitorar, filtrar e analisar conversas do WhatsApp
+- **Base de Conhecimento**: Upload e gerenciamento de arquivos (PDF, DOCX, TXT, CSV) para alimentar o RAG
+- **Configurações Avançadas**: Configuração da API OpenAI, parâmetros do modelo e integração WhatsApp
 
-There are several ways of editing your application.
+### Tecnologias Utilizadas
+- **Frontend**: React 18 + TypeScript + Tailwind CSS
+- **UI Components**: shadcn/ui para componentes profissionais
+- **Roteamento**: React Router DOM
+- **Ícones**: Lucide React
+- **Gráficos**: Recharts para visualizações
+- **Estado**: TanStack Query para gerenciamento de estado servidor
 
-**Use Lovable**
+## 🎨 Design System
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1c5555d2-f767-44bf-90c8-2ac8bc73fe4a) and start prompting.
+O projeto utiliza um design system robusto com:
+- **Tokens Semânticos**: Cores e estilos definidos via CSS custom properties
+- **Tema Responsivo**: Suporte completo para dark/light mode
+- **Gradientes Personalizados**: Efeitos visuais elegantes
+- **Animações Suaves**: Transições e micro-interações polidas
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📱 Interface
 
-**Use your preferred IDE**
+### Dashboard Principal
+- Cartões de estatísticas com métricas em tempo real
+- Feed de atividades recentes
+- Status do sistema e alertas
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Gestão de Conversas
+- Lista completa de conversas com filtros
+- Status de conversa (Ativa, Pendente, Resolvida)
+- Busca avançada e exportação de dados
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Base de Conhecimento
+- Upload drag-and-drop de arquivos
+- Status de processamento em tempo real
+- Gerenciamento de documentos indexados
 
-Follow these steps:
+### Configurações
+- Configuração da API OpenAI (modelo, temperatura)
+- Parâmetros do chatbot
+- Integração WhatsApp
+- Configurações de sistema
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+## 🛠️ Desenvolvimento
+
+### Pré-requisitos
+- Node.js 18+ 
+- npm ou yarn
+
+### Instalação
+```bash
+# Clone o repositório
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navegue para o diretório
+cd whatsapp-rag-chatbot
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Instale as dependências
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Scripts Disponíveis
+```bash
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build para produção
+npm run preview      # Preview do build
+npm run lint         # Linting do código
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🌐 Deploy no Google Cloud Platform
 
-**Use GitHub Codespaces**
+### Preparação para Deploy
+1. **Build da Aplicação**:
+   ```bash
+   npm run build
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+2. **Configuração GCP**:
+   - Configure o Google Cloud CLI
+   - Crie um projeto no GCP
+   - Habilite as APIs necessárias
 
-## What technologies are used for this project?
+3. **Deploy via App Engine**:
+   ```bash
+   gcloud app deploy
+   ```
 
-This project is built with:
+4. **Deploy via Cloud Run**:
+   ```bash
+   # Build da imagem Docker
+   docker build -t gcr.io/[PROJECT-ID]/whatsapp-rag-dashboard .
+   
+   # Push para Container Registry
+   docker push gcr.io/[PROJECT-ID]/whatsapp-rag-dashboard
+   
+   # Deploy no Cloud Run
+   gcloud run deploy --image gcr.io/[PROJECT-ID]/whatsapp-rag-dashboard
+   ```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Configurações de Produção
+- Configure variáveis de ambiente no GCP
+- Configure SSL/HTTPS
+- Configure CDN para assets estáticos
+- Monitore performance e logs
 
-## How can I deploy this project?
+## 🔧 Configuração
 
-Simply open [Lovable](https://lovable.dev/projects/1c5555d2-f767-44bf-90c8-2ac8bc73fe4a) and click on Share -> Publish.
+### Variáveis de Ambiente (Backend)
+```env
+OPENAI_API_KEY=sua_chave_openai
+WHATSAPP_API_TOKEN=seu_token_whatsapp
+DATABASE_URL=sua_url_database
+```
 
-## Can I connect a custom domain to my Lovable project?
+### Estrutura do Projeto
+```
+src/
+├── components/         # Componentes reutilizáveis
+│   ├── ui/            # Componentes shadcn/ui
+│   ├── Layout.tsx     # Layout principal
+│   ├── Sidebar.tsx    # Navegação lateral
+│   └── StatCard.tsx   # Cartões de estatísticas
+├── pages/             # Páginas da aplicação
+│   ├── Index.tsx      # Dashboard principal
+│   ├── Conversations.tsx  # Gestão de conversas
+│   ├── Knowledge.tsx  # Base de conhecimento
+│   ├── Settings.tsx   # Configurações
+│   └── NotFound.tsx   # Página 404
+├── hooks/             # Hooks customizados
+├── lib/               # Utilitários
+└── index.css          # Estilos globais e tokens
+```
 
-Yes, you can!
+## 🎯 Funcionalidades Planejadas
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Backend (Node.js + TypeScript)
+- [ ] API REST para gestão de dados
+- [ ] Integração WhatsApp Web/Business API
+- [ ] Sistema RAG com embeddings
+- [ ] Processamento de documentos
+- [ ] Autenticação e autorização
+- [ ] WebSockets para atualizações em tempo real
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Melhorias UI/UX
+- [ ] Modo escuro/claro automático
+- [ ] Internacionalização (i18n)
+- [ ] Notificações push
+- [ ] Exportação avançada de relatórios
+- [ ] Backup e restauração de dados
+
+## 📞 Suporte
+
+Para suporte técnico ou dúvidas sobre implementação:
+- Documentação completa: Em desenvolvimento
+- Issues: Use o sistema de issues do GitHub
+- Contribuições: PRs são bem-vindos!
+
+## 📄 Licença
+
+Este projeto está sob licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+---
+
+**Desenvolvido com ❤️ para automação inteligente de atendimento via WhatsApp**

@@ -1,0 +1,53 @@
+runtime: nodejs18
+
+# Configuração para Google App Engine
+service: default
+
+# Configurações de instância
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+  target_cpu_utilization: 0.6
+
+# Recursos da instância
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+# Handlers para arquivos estáticos
+handlers:
+  # Serve todos os arquivos estáticos diretamente
+  - url: /assets
+    static_dir: dist/assets
+    secure: always
+
+  # Serve o arquivo index.html para todas as rotas (SPA)
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index\.html
+    secure: always
+
+# Variables de ambiente (configure conforme necessário)
+env_variables:
+  NODE_ENV: production
+
+# Configurações de rede
+network:
+  forwarded_ports:
+    - 8080
+
+# Health check
+readiness_check:
+  path: "/"
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+
+liveness_check:
+  path: "/"
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 4
+  success_threshold: 2

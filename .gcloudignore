@@ -1,0 +1,33 @@
+# Ignore development files
+node_modules/
+npm-debug.log
+.git/
+.gitignore
+.DS_Store
+.nyc_output/
+coverage/
+
+# Ignore source files (only deploy dist/)
+src/
+public/
+*.ts
+*.tsx
+vite.config.ts
+tailwind.config.ts
+postcss.config.js
+tsconfig*.json
+eslint.config.js
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore environment files
+.env*
+!.env.example
+
+# Ignore build artifacts not needed in production
+dist/**/*.map
